@@ -75,7 +75,6 @@ app = FastAPI(
     title="ZURU Code Compliance AI API",
     description=description,
     version="0.0.1",
-    servers=[{"url": "https://zuru-code-compliance-poc.fly.dev"}],
 )
 app.mount("/.well-known", StaticFiles(directory=".well-known"), name="static")
 
@@ -174,7 +173,7 @@ async def gpt4Test(
     request: GPT4TestRequest = Body(...),
 ):
     try:
-        chat = ChatOpenAI(model_name="gpt-4")
+        chat = ChatOpenAI(model_name="gpt-4", request_timeout=360)
         res = chat([HumanMessage(content=request.prompt)])
         return GPT4TestResponse(result=res.content)
     except Exception as e:
@@ -192,7 +191,7 @@ async def answer(
         retrievedQueries = await datastore.query(
             request.queries,
         )
-        chat = ChatOpenAI(model_name="gpt-4")
+        chat = ChatOpenAI(model_name="gpt-4", request_timeout=360)
         
         finalPrompt = 'Given the following extracts from a collection of building codes: '
         for que in retrievedQueries:
