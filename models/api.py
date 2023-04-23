@@ -23,6 +23,19 @@ class QueryRequest(BaseModel):
 class QueryResponse(BaseModel):
     results: List[QueryResult]
 
+class GPT4TestRequest(BaseModel):
+    prompt: str 
+      
+class GPT4TestResponse(BaseModel):
+    result: str
+
+class AnswerRequest(BaseModel):
+    queries: List[Query]
+    prompt: str
+
+class AnswerResponse(BaseModel):
+    result: str
+    sources: List[QueryResult]
 
 class DeleteRequest(BaseModel):
     ids: Optional[List[str]] = None
