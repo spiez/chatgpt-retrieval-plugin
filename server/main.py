@@ -55,6 +55,20 @@ This endpoint allows you to ask questions about all of the documents stored in t
 3. Enter a question in the `prompt` field (replacing the _string_, leave the quotes)
 6. Click on the `Execute` button
 
+This is an example of a request body for the `answer` endpoint:
+
+```json
+{
+  "queries": [
+    {
+      "query": "Are sprinklers required for small homes? If no, which fire suppression measures are mandatory?",
+      "top_k": 40
+    }
+  ],
+  "prompt": "Are sprinklers required for small homes? If no, which fire suppression measures are mandatory?"
+}
+```
+
 """
 
 app = FastAPI(
